@@ -1,18 +1,50 @@
 <template>
   <v-container>
     <h1>Home Page</h1>
-    <div class="chart-grid">
-      <LineChart class="custom-line-chart" :chartData="TemperatureData" :options="chartOptions" />
-      <LineChart class="custom-line-chart" :chartData="PHData" :options="chartOptions" />
-      <LineChart class="custom-line-chart" :chartData="TurbidityData" :options="chartOptions" />
-      <LineChart class="custom-line-chart" :chartData="ConductivityData" :options="chartOptions" />
-      <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+    <div class="chart-and-image-container">
+      <div class="chart-grid">
+        <div class="chart-item">
+          <div class="chart-header">
+            <v-icon>mdi-thermometer</v-icon>
+            <span>Temperature</span>
+          </div>
+          <LineChart class="custom-line-chart" :chartData="TemperatureData" :options="chartOptions" />
+        </div>
+        <div class="chart-item">
+          <div class="chart-header">
+            <v-icon>mdi-flask-outline</v-icon>
+            <span>PH</span>
+          </div>
+          <LineChart class="custom-line-chart" :chartData="PHData" :options="chartOptions" />
+        </div>
+        <div class="chart-item">
+          <div class="chart-header">
+            <v-icon>mdi-water</v-icon>
+            <span>Turbidity</span>
+          </div>
+          <LineChart class="custom-line-chart" :chartData="TurbidityData" :options="chartOptions" />
+        </div>
+        <div class="chart-item">
+          <div class="chart-header">
+            <v-icon>mdi-flash</v-icon>
+            <span>Conductivity</span>
+          </div>
+          <LineChart class="custom-line-chart" :chartData="ConductivityData" :options="chartOptions" />
+        </div>
+        <div class="chart-item">
+          <div class="chart-header">
+            <v-icon>mdi-air-filter</v-icon>
+            <span>Oxygen</span>
+          </div>
+          <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+        </div>
+      </div>
       <div class="image-container">
         <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
         <button @click="switchImage">Switch Image</button>
       </div>
     </div>
-</v-container>
+  </v-container>
 </template>
 
 <script>
