@@ -1,5 +1,7 @@
 <template>
-  <v-navigation-drawer app>
+  <v-navigation-drawer app
+        theme="dark"
+        permanent>
     <v-list>
       <v-list-item-group>
         <v-list-item>
