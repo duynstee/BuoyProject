@@ -1,14 +1,129 @@
 <template>
   <v-container>
     <h1>Home Page</h1>
-  </v-container>
+    <div class="chart-grid">
+      <LineChart class="custom-line-chart" :chartData="TemperatureData" :options="chartOptions" />
+      <LineChart class="custom-line-chart" :chartData="PHData" :options="chartOptions" />
+      <LineChart class="custom-line-chart" :chartData="TurbidityData" :options="chartOptions" />
+      <LineChart class="custom-line-chart" :chartData="ConductivityData" :options="chartOptions" />
+      <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+    </div>
+      <div class="image-container">
+        <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
+        <button @click="switchImage">Switch Image</button>
+      </div>
+</v-container>
 </template>
 
 <script>
+import LineChart from "@/components/LineChart.vue";
+import ThumbsUp from "@/assets/ThumbsUp.jpg";
+import ThumbsDown from "@/assets/ThumbsDown.jpg";
+
+
 export default {
   name: "HomePage",
+  components: {
+    LineChart,
+  },
+  data() {
+    return {
+      TemperatureData: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        datasets: [
+          {
+            label: "Temperature",
+            backgroundColor: "#f87979",
+            data: [50, 40, 30, 20, 10, 0, -10, -20],
+          },
+        ],
+      },
+
+      PHData: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        datasets: [
+          {
+            label: "PH level",
+            backgroundColor: "#79f879",
+            data: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+          },
+        ],
+      },
+
+      TurbidityData: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        datasets: [
+          {
+            label: "Turbidity",
+            backgroundColor: "#7979f8",
+            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
+          },
+        ],
+      },
+
+      ConductivityData: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        datasets: [
+          {
+            label: "Conductivity",
+            backgroundColor: "#f8f879",
+            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
+          },
+        ],
+      },
+
+      OxygenData: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        datasets: [
+          {
+            label: "Oxygen",
+            backgroundColor: "#f879f8",
+            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
+          },
+        ],
+      },
+
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      currentImage: ThumbsUp,
+    };
+  },
+  methods: {
+    switchImage() {
+      this.currentImage = this.currentImage === ThumbsUp ? ThumbsDown : ThumbsUp;
+    },
+  },
   mounted() {
     console.log("HomePage mounted");
+    console.log("TemperatureData:", this.chartData);
+    console.log("PHData:", this.chartData);
+    console.log("TurbidityData:", this.chartData);
+    console.log("ConductivityData:", this.chartData);
+    console.log("OxygenData:", this.chartData);
+    console.log("chartOptions:", this.chartOptions);
   },
 };
 </script>
+
+<style scoped>
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+}
+.custom-line-chart {
+  width: 100%;
+  height: 350px;
+}
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.thumbs-image {
+  width: 200px;
+  height: 200px;
+}
+</style>
