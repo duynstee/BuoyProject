@@ -7,11 +7,11 @@
       <LineChart class="custom-line-chart" :chartData="TurbidityData" :options="chartOptions" />
       <LineChart class="custom-line-chart" :chartData="ConductivityData" :options="chartOptions" />
       <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
-    </div>
       <div class="image-container">
         <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
         <button @click="switchImage">Switch Image</button>
       </div>
+    </div>
 </v-container>
 </template>
 
@@ -45,7 +45,7 @@ export default {
           {
             label: "PH level",
             backgroundColor: "#79f879",
-            data: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+            data: [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
           },
         ],
       },
@@ -111,7 +111,7 @@ export default {
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1px;
+  grid-gap: 2px;
 }
 .custom-line-chart {
   width: 100%;
@@ -123,7 +123,7 @@ export default {
   align-items: center;
 }
 .thumbs-image {
-  width: 200px;
-  height: 200px;
+  width: 350px;
+  height: 350px;
 }
 </style>
