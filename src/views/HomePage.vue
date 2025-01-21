@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <H1>Boei Locaties</H1>
-    <div style="width: 100%; height: 500px">
-      <MapComponent style="display: block; width: 100%; height: 100%" />
+    <h1>Boei Locaties</h1>
+    <div style="width: 100%; height: 600px">
+      <Map />
     </div>
 
     <h1>Data boeien</h1>
@@ -76,12 +76,13 @@
 import LineChart from "@/components/LineChart.vue";
 import ThumbsUp from "@/assets/ThumbsUp.jpg";
 import ThumbsDown from "@/assets/ThumbsDown.jpg";
-import MapComponent from "@/components/MapComponent.vue";
+import Map from "@/components/Map.vue";
 
 export default {
   name: "HomePage",
   components: {
     LineChart,
+    Map,
   },
   data() {
     return {
