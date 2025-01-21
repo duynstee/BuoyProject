@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app theme="dark" color="primary">
-    <v-toolbar-title>
+    <v-toolbar-title class="title">
       <v-icon size= "48px" class="icon">mdi-elephant</v-icon>
       Buoy data</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -34,6 +34,13 @@ router-link {
   color: inherit;
 }
 
+.title {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .nav-link:visited,
 .nav-link:active,
 .nav-link:hover {
@@ -42,5 +49,6 @@ router-link {
 
 .icon {
   margin-right: 16px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 </style>

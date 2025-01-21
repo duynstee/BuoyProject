@@ -41,9 +41,6 @@ export default {
   data() {
     return {
       buoys: [
-        { id: 1, name: '1' },
-        { id: 2, name: '2' },
-        { id: 3, name: '3' }
       ],
       newBuoyName: '',
       buoyToDelete: null
