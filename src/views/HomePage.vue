@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h1>Boei Locaties</h1>
-    <div style="width: 100%; height: 600px">
+    <div style="width: 100%; height: 75vh">
       <Map />
     </div>
 
