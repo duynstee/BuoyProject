@@ -1,8 +1,10 @@
 <template>
   <v-container>
-    <h1>Boei locaties</h1>
-    
-    
+    <H1>Boei Locaties</H1>
+    <div style="width: 100%; height: 500px">
+      <MapComponent style="display: block; width: 100%; height: 100%" />
+    </div>
+
     <h1>Data boeien</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
@@ -11,35 +13,55 @@
             <v-icon>mdi-thermometer</v-icon>
             <span>Temperature</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="TemperatureData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="TemperatureData"
+            :options="chartOptions"
+          />
         </div>
         <div class="chart-item">
           <div class="chart-header">
             <v-icon>mdi-flask-outline</v-icon>
             <span>PH</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="PHData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="PHData"
+            :options="chartOptions"
+          />
         </div>
         <div class="chart-item">
           <div class="chart-header">
             <v-icon>mdi-water</v-icon>
             <span>Turbidity</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="TurbidityData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="TurbidityData"
+            :options="chartOptions"
+          />
         </div>
         <div class="chart-item">
           <div class="chart-header">
             <v-icon>mdi-flash</v-icon>
             <span>Conductivity</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="ConductivityData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="ConductivityData"
+            :options="chartOptions"
+          />
         </div>
         <div class="chart-item">
           <div class="chart-header">
             <v-icon>mdi-air-filter</v-icon>
             <span>Oxygen</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="OxygenData"
+            :options="chartOptions"
+          />
         </div>
       </div>
       <div class="image-container">
@@ -54,7 +76,7 @@
 import LineChart from "@/components/LineChart.vue";
 import ThumbsUp from "@/assets/ThumbsUp.jpg";
 import ThumbsDown from "@/assets/ThumbsDown.jpg";
-
+import MapComponent from "@/components/MapComponent.vue";
 
 export default {
   name: "HomePage",
@@ -64,7 +86,15 @@ export default {
   data() {
     return {
       TemperatureData: {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         datasets: [
           {
             label: "Temperature",
@@ -75,7 +105,15 @@ export default {
       },
 
       PHData: {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         datasets: [
           {
             label: "PH level",
@@ -86,7 +124,15 @@ export default {
       },
 
       TurbidityData: {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         datasets: [
           {
             label: "Turbidity",
@@ -97,7 +143,15 @@ export default {
       },
 
       ConductivityData: {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         datasets: [
           {
             label: "Conductivity",
@@ -108,7 +162,15 @@ export default {
       },
 
       OxygenData: {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        labels: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         datasets: [
           {
             label: "Oxygen",
@@ -127,7 +189,8 @@ export default {
   },
   methods: {
     switchImage() {
-      this.currentImage = this.currentImage === ThumbsUp ? ThumbsDown : ThumbsUp;
+      this.currentImage =
+        this.currentImage === ThumbsUp ? ThumbsDown : ThumbsUp;
     },
   },
   mounted() {
