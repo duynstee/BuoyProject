@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app theme="dark" color="primary">
+  <v-app-bar app theme="dark" color="green">
     <v-toolbar-title class="title">
       <v-icon size= "48px" class="icon">mdi-elephant</v-icon>
       Buoy data</v-toolbar-title>
