@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Buoy locations</h1>
+    <h1 class="title">Buoy locations</h1>
     
     
     <h1>Data buoys</h1>
@@ -143,6 +143,11 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
