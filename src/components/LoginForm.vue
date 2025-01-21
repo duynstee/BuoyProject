@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .login-card {
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.90);
   border-radius: 8px;
   padding: 20px;
 }

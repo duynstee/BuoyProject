@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <h1>Boei Locaties</h1>
+    <h1>Boei locaties</h1>
     <div style="width: 100%; height: 75vh">
       <Map />
     </div>
-
+    
     <h1>Data boeien</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
@@ -57,11 +57,7 @@
             <v-icon>mdi-air-filter</v-icon>
             <span>Oxygen</span>
           </div>
-          <LineChart
-            class="custom-line-chart"
-            :chartData="OxygenData"
-            :options="chartOptions"
-          />
+          <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
         </div>
       </div>
       <div class="image-container">
@@ -207,6 +203,11 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -220,6 +221,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 20px;
 }
 .thumbs-image {
   width: 350px;
