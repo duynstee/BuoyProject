@@ -20,5 +20,4 @@
   </script>
   
   <style scoped>
-  /* Add any specific styles for the menu component here */
   </style>

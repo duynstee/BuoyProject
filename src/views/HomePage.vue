@@ -59,10 +59,10 @@
           </div>
           <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
         </div>
-      </div>
-      <div class="image-container">
-        <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
-        <button @click="switchImage">Switch Image</button>
+        <div class="image-container">
+          <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
+          <button @click="switchImage">Switch Image</button>
+        </div>
       </div>
     </div>
   </v-container>
