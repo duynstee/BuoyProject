@@ -11,6 +11,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import Navigation from "./components/Navigation.vue";
 import LineChart from "./components/LineChart.vue";
+import BuoyMenu from "./components/BuoyMenu.vue";
 
 export default {
   name: "App",
@@ -18,7 +19,8 @@ export default {
   components: {
     HelloWorld,
     Navigation,
-    LineChart
+    LineChart,
+    BuoyMenu,
   },
 
   data: () => ({

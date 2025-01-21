@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <h1>Boei locaties</h1>
+    <h1>Buoy locations</h1>
     
     
-    <h1>Data boeien</h1>
+    <h1>Data buoys</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
         <div class="chart-item">
@@ -41,10 +41,10 @@
           </div>
           <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
         </div>
-      </div>
-      <div class="image-container">
-        <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
-        <button @click="switchImage">Switch Image</button>
+        <div class="image-container">
+          <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
+          <button @click="switchImage">Quality of the water</button>
+        </div>
       </div>
     </div>
   </v-container>
@@ -156,6 +156,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 20px;
 }
 .thumbs-image {
   width: 350px;
