@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <h1>Home Page</h1>
+    <h1>Boei locaties</h1>
+    
+    
+    <h1>Data boeien</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
         <div class="chart-item">

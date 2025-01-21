@@ -1,27 +1,28 @@
 <template>
-  <v-navigation-drawer app
-        theme="dark"
-        permanent>
-    <v-list>
-      <v-list-item-group>
-        <v-list-item>
-          <router-link to="/">Home</router-link>
-        </v-list-item>
-        <v-list-item>
-          <router-link to="/login">Login</router-link>
-        </v-list-item>
-        <v-list-item>
-          <router-link to="/settings">Settings</router-link>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
+  <v-app-bar app theme="dark" color="primary">
+    <v-toolbar-title>Boeien data</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text>
+      <router-link to="/">Home</router-link>
+    </v-btn>
+    <v-btn text>
+      <router-link to="/login">Login</router-link>
+    </v-btn>
+    <v-btn text>
+      <router-link to="/settings">Settings</router-link>
+    </v-btn>
+  </v-app-bar>
 </template>
 
 <script>
 export default {
-  name: "NavigationDrawer",
+  name: "NavigationBar",
 };
 </script>
 
-<style></style>
+<style>
+router-link {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
