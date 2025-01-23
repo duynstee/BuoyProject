@@ -18,6 +18,10 @@
       <router-link to="/settings" class="nav-link">
         <v-icon>mdi-cog</v-icon>
         Settings</router-link>
+      </v-btn>
+    <v-btn text @click="logout">
+      <v-icon>mdi-logout</v-icon>
+      Logout
     </v-btn>
   </v-app-bar>
 </template>
@@ -25,6 +29,12 @@
 <script>
 export default {
   name: "NavigationBar",
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push({ name: "Home" });
+    }
+  }
 };
 </script>
 

@@ -9,7 +9,7 @@ import SettingsPage from "../views/SettingsPage.vue";
 const routes = [
   { path: "/", name: "Home", component: HomePage },
   { path: "/login", name: "Login", component: LoginPage },
-  { path: "/settings", name: "Settings", component: SettingsPage },
+  { path: "/settings", name: "Settings", component: SettingsPage, meta: { requiresAuth: true } },
 ];
 
 // Create the router instance

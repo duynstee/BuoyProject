@@ -76,7 +76,7 @@ export default {
         const savedToken = localStorage.getItem("token");
         console.log("Saved token in local storage:", savedToken);
 
-        this.$router.push("/"); // Navigate to home
+        this.$router.push({ name: "Settings" }); // Navigate to settings page
       } catch (error) {
         this.errorMessages =
           error.response?.data?.message || "An error occurred.";
