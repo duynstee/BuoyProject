@@ -24,7 +24,7 @@
       </v-form>
     </buoy-menu>
 
-    <!-- Add Buoy Dialog -->
+    <!-- Buoy popup-->
     <v-dialog v-model="showAddBuoyDialog" max-width="500px">
       <v-card>
         <v-card-title>Add a New Buoy</v-card-title>
@@ -67,18 +67,21 @@
     <v-dialog v-model="mapPicker" max-width="800px" persistent>
       <v-card>
         <v-card-title>Pick a Location</v-card-title>
-        <v-card-text>
+          <v-card-text>
           <map-picker
             :buoys="buoys"
             @location-selected="setLocation"
-          ></map-picker>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="mapPicker = false">Confirm</v-btn>
-          <v-btn color="secondary" @click="mapPicker = false">Cancel</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+      ></map-picker>
+    </v-card-text>
+    <v-card-actions>
+      <!-- Confirm button updates the final location -->
+      <v-btn color="primary" @click="confirmLocation">Cancel</v-btn>
+      <!-- Cancel button discards the temporary location -->
+      <v-btn color="secondary" @click="cancelLocationSelection">Confirm</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+
   </v-container>
 </template>
 
@@ -112,33 +115,47 @@ export default {
   },
   methods: {
     addBuoy() {
-      if (this.newBuoyName && this.selectedLocation) {
-        const newId = this.buoys.length
-          ? this.buoys[this.buoys.length - 1].id + 1
-          : 1;
-        const newBuoy = {
-          id: newId,
-          name: this.newBuoyName,
-          sensors: this.sensors.map((sensor) => ({
-            name: sensor.name,
-            enabled: sensor.enabled,
-          })),
-          location: this.selectedLocation,
-        };
-        
-        this.buoys.push(newBuoy);
-        this.newBuoyName = "";
-        this.sensors.forEach((sensor) => (sensor.enabled = false));
-        this.selectedLocation = null;
-        this.showAddBuoyDialog = false;
-      }
-    },
+    if (this.newBuoyName && this.selectedLocation) {
+      const newId = this.buoys.length
+        ? this.buoys[this.buoys.length - 1].id + 1
+        : 1;
+      const newBuoy = {
+        id: newId,
+        name: this.newBuoyName,
+        sensors: this.sensors.map((sensor) => ({
+          name: sensor.name,
+          enabled: sensor.enabled,
+        })),
+        location: this.selectedLocation,
+      };
+
+      this.buoys.push(newBuoy);
+      this.newBuoyName = "";
+      this.sensors.forEach((sensor) => (sensor.enabled = false));
+      this.selectedLocation = null;
+      this.showAddBuoyDialog = false;
+    }
+  },
     deleteBuoy() {
-      if (this.buoyToDelete !== null) {
-        this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
-        this.buoyToDelete = null;
-      }
-    },
+    if (this.buoyToDelete !== null) {
+      this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
+      this.buoyToDelete = null;
+    }
+  },
+  setLocation(location) {
+    // Update the temporary location when a selection is made
+    this.temporaryLocation = location;
+  },
+  confirmLocation() {
+    // Update the final selected location and close the map picker
+    this.selectedLocation = this.temporaryLocation;
+    this.mapPicker = false;
+  },
+  cancelLocationSelection() {
+    // Discard the temporary location and close the map picker
+    this.temporaryLocation = null;
+    this.mapPicker = false;
+  },
     async addUser() {
       if (this.newUsername && this.newPassword) {
         try {
