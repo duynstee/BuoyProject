@@ -43,6 +43,25 @@ app.post('/login', (req, res) => {
   }
 });
 
+app.post('/addUser', verifyToken, (req, res) => {
+  const { username, password } = req.body;
+  console.log('Received request to add user:', username,);
+
+  if (users.find(u => u.username === username)) {
+    console.log('User already exists', username);	
+    return res.status(400).json({ message: 'User already exists' });
+  }
+
+  try {
+    users.push({ username, password });
+    console.log('User added successfully:', username);
+    res.status(201).json({ message: 'User added successfully' });
+  } catch (error) {
+    console.error('Error adding user:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 app.get('/protected', verifyToken, (req, res) => {
     res.json({ message: 'This is a protected route' });
   });

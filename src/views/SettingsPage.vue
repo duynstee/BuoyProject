@@ -27,10 +27,19 @@
       </v-form>
     </buoy-menu>
 
+    <buoy-menu class="menustyle" title="Add Users">
+      <v-form @submit.prevent="addUser">
+        <v-text-field v-model="newUsername" label="Username" required></v-text-field>
+        <v-text-field v-model="newPassword" label="Password" type="password" required></v-text-field>
+        <v-btn type="submit" color="primary">Add User</v-btn>
+      </v-form>
+    </buoy-menu>
+
   </v-container>
 </template>
 
 <script>
+import axios from 'axios';
 import BuoyMenu from '@/components/BuoyMenu.vue';
 
 export default {
@@ -40,10 +49,11 @@ export default {
   },
   data() {
     return {
-      buoys: [
-      ],
+      buoys: [],
       newBuoyName: '',
-      buoyToDelete: null
+      buoyToDelete: null,
+      newUsername: '',
+      newPassword: ''
     };
   },
   methods: {
@@ -58,6 +68,25 @@ export default {
       if (this.buoyToDelete !== null) {
         this.buoys = this.buoys.filter(buoy => buoy.id !== this.buoyToDelete);
         this.buoyToDelete = null;
+      }
+    },
+    async addUser() {
+      if (this.newUsername && this.newPassword) {
+        try {
+          const response = await axios.post('http://localhost:3000/addUser', {
+            username: this.newUsername,
+            password: this.newPassword
+          }, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          });
+          console.log(`User added: ${response.data.message}`);
+          this.newUsername = '';
+          this.newPassword = '';  
+        } catch (error) {
+          console.error('Error adding user: ', error);
+        }
       }
     }
   }
