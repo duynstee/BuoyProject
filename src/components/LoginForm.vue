@@ -11,6 +11,7 @@
           label="Username"
           outlined
           required
+          :rules="[rules.required]"
         ></v-text-field>
 
         <v-text-field
@@ -19,7 +20,10 @@
           type="password"
           outlined
           required
+          :rules="[rules.required]"
         ></v-text-field>
+
+        <p v-if="errorMessages" class="error-message">{{ errorMessages }}</p>
       </v-form>
     </v-card-text>
 
@@ -32,21 +36,76 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       username: "",
       password: "",
       formValid: false,
+      errorMessages: "",
+      rules: {
+        required: (value) => !!value || "Required."
+      },
+      protectedData: null,
     };
   },
   methods: {
-    handleLogin() {
-      // Here you would send the login request to your backend or authentication service
+    async handleLogin() {
+      console.log("Login button clicked");
       console.log("Username:", this.username);
       console.log("Password:", this.password);
+
+      if (!this.username || !this.password) {
+        this.errorMessages = "Username and password are required.";
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:3000/login", {
+          username: this.username,
+          password: this.password,
+        });
+
+        const token = response.data.token;
+        console.log("Received token:", token); // Log the token to the console
+        localStorage.setItem("token", token);
+
+        // Verify if the token is saved in local storage
+        const savedToken = localStorage.getItem("token");
+        console.log("Saved token in local storage:", savedToken);
+
+        this.$router.push("/"); // Navigate to home
+      } catch (error) {
+        this.errorMessages =
+          error.response?.data?.message || "An error occurred.";
+        console.error("Error logging in:", error);
+      }
     },
+    async fetchProtectedData() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        this.errorMessages = "No token found. Please log in.";
+        return;
+      }
+
+      try {
+        const response = await axios.get('http://localhost:3000/protected', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        this.protectedData = response.data;
+      } catch (error) {
+        this.errorMessages = error.response?.data?.message || "An error occurred.";
+        console.error("Error fetching protected data:", error);
+      }
+    }
   },
+  mounted() {
+    this.fetchProtectedData();
+  }
 };
 </script>
 
