@@ -10,21 +10,16 @@
     <v-btn text>
       <router-link to="/" class="nav-link">
         <v-icon>mdi-home</v-icon>
-        Home</router-link
-      >
+        Home</router-link>
     </v-btn>
-    <v-btn text>
-      <router-link to="/login" class="nav-link">
-        <v-icon>mdi-account</v-icon>
-        Login</router-link
-      >
-    </v-btn>
+
     <v-btn text>
       <router-link to="/settings" class="nav-link">
         <v-icon>mdi-cog</v-icon>
         Settings
       </router-link>
     </v-btn>
+
     <v-btn text v-if="!isLoggedIn">
       <router-link to="/login" class="nav-link">
         <v-icon>mdi-account</v-icon>
@@ -39,32 +34,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const token = ref(localStorage.getItem("token"));
 const isLoggedIn = ref(!!token.value);
 
-watch(token, (newToken) => {
-  isLoggedIn.value = !!newToken;
+watchEffect(() => {
+  isLoggedIn.value = !!token.value;
 });
-
-onMounted(() => {
-  checkLoginStatus();
-});
-
-function checkLoginStatus() {
-  const storedToken = localStorage.getItem("token");
-  token.value = storedToken;
-  isLoggedIn.value = !!storedToken;
-}
 
 function logout() {
   localStorage.removeItem("token");
   token.value = null;
   router.push({ name: "Home" });
 }
+
+document.addEventListener("login-success", () => {
+  token.value = localStorage.getItem("token");
+});
 </script>
 
 <style scoped>

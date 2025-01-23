@@ -72,6 +72,8 @@ export default {
         console.log("Received token:", token); // Log the token to the console
         localStorage.setItem("token", token);
 
+        this.$emit("login-success");
+
         // Verify if the token is saved in local storage
         const savedToken = localStorage.getItem("token");
         console.log("Saved token in local storage:", savedToken);
