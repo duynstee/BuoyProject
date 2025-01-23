@@ -57,7 +57,11 @@
             <v-icon>mdi-air-filter</v-icon>
             <span>Oxygen</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="OxygenData"
+            :options="chartOptions"
+          />
         </div>
         <div class="image-container">
           <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
@@ -73,6 +77,7 @@ import LineChart from "@/components/LineChart.vue";
 import ThumbsUp from "@/assets/ThumbsUp.jpg";
 import ThumbsDown from "@/assets/ThumbsDown.jpg";
 import Map from "@/components/Map.vue";
+import MapPicker from "@/components/MapPicker.vue";
 
 export default {
   name: "HomePage",
@@ -141,7 +146,7 @@ export default {
             label: "Boei 2",
             backgroundColor: "#79f879",
             borderColor: "#79f879",
-            data: [0, 1 , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
           },
           {
             label: "Boei 3",
@@ -207,7 +212,7 @@ export default {
           "Sunday",
         ],
         datasets: [
-        {
+          {
             label: "Boei 1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -245,7 +250,7 @@ export default {
           "Sunday",
         ],
         datasets: [
-        {
+          {
             label: "Boei 1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
