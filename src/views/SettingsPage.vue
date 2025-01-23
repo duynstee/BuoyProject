@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import BuoyMenu from "@/components/BuoyMenu.vue";
 import MapPicker from "@/components/MapPicker.vue";
 
@@ -136,6 +137,25 @@ export default {
       if (this.buoyToDelete !== null) {
         this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
         this.buoyToDelete = null;
+      }
+    },
+    async addUser() {
+      if (this.newUsername && this.newPassword) {
+        try {
+          const response = await axios.post('http://localhost:3000/addUser', {
+            username: this.newUsername,
+            password: this.newPassword
+          }, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          });
+          console.log(`User added: ${response.data.message}`);
+          this.newUsername = '';
+          this.newPassword = '';  
+        } catch (error) {
+          console.error('Error adding user: ', error);
+        }
       }
     },
     setLocation(location) {
