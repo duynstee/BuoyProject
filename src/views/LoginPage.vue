@@ -15,6 +15,12 @@ export default {
   components: {
     LoginForm,
   },
+  methods: {
+    handleLoginSuccess() {
+      this.$emit("login-success");
+      console.log("Login button clicked");
+    },
+  },
 };
 </script>
 

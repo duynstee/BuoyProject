@@ -84,6 +84,7 @@ import LineChart from "@/components/LineChart.vue";
 import ThumbsUp from "@/assets/ThumbsUp.jpg";
 import ThumbsDown from "@/assets/ThumbsDown.jpg";
 import Map from "@/components/Map.vue";
+import MapPicker from "@/components/MapPicker.vue";
 
 export default {
   name: "HomePage",

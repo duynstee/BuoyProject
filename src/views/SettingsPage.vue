@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height class="background-image full-height">
     <h1 class="title">Settings Page</h1>
-    
+
     <buoy-menu class="menustyle" title="View All Buoys">
       <ul v-if="buoys.length">
         <li v-for="buoy in buoys" :key="buoy.id">{{ buoy.name }}</li>
@@ -9,15 +9,13 @@
       <p v-else>No buoys available</p>
     </buoy-menu>
 
-    <buoy-menu class= "menustyle" title="Add or Delete Buoys">
-      <v-form @submit.prevent="addBuoy">
-        <v-text-field v-model="newBuoyName" label="Buoy Name" required></v-text-field>
-        <v-btn type="submit" color="primary">Add Buoy</v-btn>
-      </v-form>
+    <buoy-menu class="menustyle" title="Add or Delete Buoys">
+      <v-btn color="primary" @click="showAddBuoyDialog = true">Add Buoy</v-btn>
       <v-form @submit.prevent="deleteBuoy" class="delete-form">
         <v-select
           v-model="buoyToDelete"
           :items="buoys"
+          item-title="name"
           item-text="name"
           item-value="id"
           label="Select Buoy to Delete"
@@ -27,40 +25,171 @@
       </v-form>
     </buoy-menu>
 
+    <!-- Buoy popup-->
+    <v-dialog v-model="showAddBuoyDialog" max-width="500px">
+      <v-card>
+        <v-card-title>Add a New Buoy</v-card-title>
+        <v-card-text>
+          <v-form @submit.prevent="addBuoy">
+            <v-text-field
+              v-model="newBuoyName"
+              label="Buoy Name"
+              required
+            ></v-text-field>
+            <div>
+              <p>Enable Sensors:</p>
+              <v-switch
+                v-for="sensor in sensors"
+                :key="sensor.name"
+                v-model="sensor.enabled"
+                :label="sensor.name"
+                inset
+              ></v-switch>
+            </div>
+          </v-form>
+          <v-btn color="info" block @click="mapPicker = true"
+            >Pick Location</v-btn
+          >
+          <p v-if="selectedLocation">
+            Selected Location: Lat {{ selectedLocation.lat }}, Lng
+            {{ selectedLocation.lng }}
+          </p>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="addBuoy">Add</v-btn>
+          <v-btn color="secondary" @click="showAddBuoyDialog = false"
+            >Cancel</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Map Dialog -->
+    <v-dialog v-model="mapPicker" max-width="800px" persistent>
+      <v-card>
+        <v-card-title>Pick a Location</v-card-title>
+        <v-card-text>
+          <map-picker
+            :buoys="buoys"
+            @location-selected="setLocation"
+          ></map-picker>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="confirmLocation">Confirm</v-btn>
+
+          <v-btn color="secondary" @click="cancelLocationSelection"
+            >cancel</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <div style="width: 100%; height: 75vh">
+      <Map />
+    </div>
   </v-container>
 </template>
 
 <script>
-import BuoyMenu from '@/components/BuoyMenu.vue';
+import axios from "axios";
+import BuoyMenu from "@/components/BuoyMenu.vue";
+import MapPicker from "@/components/MapPicker.vue";
 
 export default {
-  name: 'SettingsPage',
+  name: "SettingsPage",
   components: {
-    BuoyMenu
+    BuoyMenu,
+    MapPicker,
   },
   data() {
     return {
-      buoys: [
+      buoys: [],
+      newBuoyName: "",
+      buoyToDelete: null,
+      showAddBuoyDialog: false,
+      mapPicker: false,
+      selectedLocation: null,
+      sensors: [
+        { name: "pH", enabled: false },
+        { name: "Oxygen", enabled: false },
+        { name: "Temperature", enabled: false },
+        { name: "Turbidity", enabled: false },
+        { name: "Electrical Conductivity", enabled: false },
       ],
-      newBuoyName: '',
-      buoyToDelete: null
     };
   },
   methods: {
     addBuoy() {
-      if (this.newBuoyName) {
-        const newId = this.buoys.length ? this.buoys[this.buoys.length - 1].id + 1 : 1;
-        this.buoys.push({ id: newId, name: this.newBuoyName });
-        this.newBuoyName = '';
+      if (this.newBuoyName && this.selectedLocation) {
+        const newId = this.buoys.length
+          ? this.buoys[this.buoys.length - 1].id + 1
+          : 1;
+        const newBuoy = {
+          id: newId,
+          name: this.newBuoyName,
+          sensors: this.sensors.map((sensor) => ({
+            name: sensor.name,
+            enabled: sensor.enabled,
+          })),
+          location: this.selectedLocation,
+        };
+
+        this.buoys.push(newBuoy);
+        this.newBuoyName = "";
+        this.sensors.forEach((sensor) => (sensor.enabled = false));
+        this.selectedLocation = null;
+        this.showAddBuoyDialog = false;
+
+        selectedLocation = null;
       }
     },
     deleteBuoy() {
       if (this.buoyToDelete !== null) {
-        this.buoys = this.buoys.filter(buoy => buoy.id !== this.buoyToDelete);
+        this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
         this.buoyToDelete = null;
       }
-    }
-  }
+    },
+    setLocation(location) {
+      // Update the temporary location when a selection is made
+      this.temporaryLocation = location;
+    },
+    cancelLocationSelection() {
+      // Update the final selected location and close the map picker
+      this.selectedLocation = this.temporaryLocation;
+      this.mapPicker = false;
+    },
+    confirmLocation() {
+      // Discard the temporary location and close the map picker
+      this.temporaryLocation = null;
+      this.mapPicker = false;
+    },
+    async addUser() {
+      if (this.newUsername && this.newPassword) {
+        try {
+          const response = await axios.post(
+            "http://localhost:3000/addUser",
+            {
+              username: this.newUsername,
+              password: this.newPassword,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          console.log(`User added: ${response.data.message}`);
+          this.newUsername = "";
+          this.newPassword = "";
+        } catch (error) {
+          console.error("Error adding user: ", error);
+        }
+      }
+    },
+    setLocation(location) {
+      this.selectedLocation = location;
+    },
+  },
 };
 </script>
 
@@ -77,7 +206,7 @@ export default {
 
 .menustyle {
   margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   padding: 20px;
 }
