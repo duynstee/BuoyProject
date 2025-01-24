@@ -74,9 +74,9 @@
       ></map-picker>
     </v-card-text>
     <v-card-actions>
-      <!-- Confirm button updates the final location -->
+      
       <v-btn color="primary" @click="confirmLocation">Cancel</v-btn>
-      <!-- Cancel button discards the temporary location -->
+
       <v-btn color="secondary" @click="cancelLocationSelection">Confirm</v-btn>
     </v-card-actions>
   </v-card>
