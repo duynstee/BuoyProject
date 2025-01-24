@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const users = [
-  { username: 'admin', password: 'groep3' },
+  { username: 'admin', password: 'asdf' },
   // Add more users as needed
 ];
 
