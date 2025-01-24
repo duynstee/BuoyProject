@@ -63,7 +63,7 @@ export default {
       }
 
       try {
-        const response = await axios.post("http://localhost:3000/login", {
+        const response = await axios.post("http://buoyprojectbackend.azurewebsites.net/login", {
           username: this.username,
           password: this.password,
         });
