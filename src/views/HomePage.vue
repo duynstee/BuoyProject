@@ -109,7 +109,7 @@ export default {
             label: "Boei 1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
-            data: [50, 40, 30, 20, 10, 0, -10, -20],
+            data: [10, 10, 10, 10, 10, 10, 10, 10],
           },
           {
             label: "Boei 2",

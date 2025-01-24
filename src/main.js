@@ -113,5 +113,35 @@ const fetchData = async () => {
   }
 };
 
+const fetchDataGraphs = async () => {
+  const url =
+    "https://gec13051aa051a2-boei3.adb.eu-amsterdam-1.oraclecloudapps.com/ords/admin/metingen/";
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json", // Tells the server you're expecting JSON
+        //'Authorization': 'Bearer your_api_token', // Optional: Include if your API requires a token
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json(); // Parse the JSON response
+    const tempArray = data.items;
+
+    for (const element of tempArray) {
+      temperatuurArray = element.temperatuur;
+      phArray = element.phwaarde;
+      ecArray = element.ecvoltage;
+      turbidityArray = element.turbiditeit;
+    }
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+  }
+};
 // Call the function
 fetchData();
