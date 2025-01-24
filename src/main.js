@@ -38,15 +38,17 @@ const fetchData = async () => {
           " Boei ID: " +
           element.boei_id +
           " Grenswaarde overschreden" +
-          " Waarde: " +
+          " Temperatuur: " +
           element.temperatuur +
           " op tijdstip: " +
           element.tijd;
         let div = document.getElementById("log");
         let p = document.createElement("p");
         let l = document.createElement("hr");
+        let b = document.createElement("br");
         div.append(message, p);
         div.append(l);
+        div.append(b);
       } else if (element.phwaarde > 9 || element.phwaarde < 6) {
         let message =
           "Kritiek waarde gevonden! Meting: " +
@@ -54,7 +56,7 @@ const fetchData = async () => {
           " Boei ID: " +
           element.boei_id +
           " Grenswaarde overschreden" +
-          " Waarde: " +
+          " pH Waarde: " +
           element.phwaarde +
           " op tijdstip: " +
           element.tijd;
@@ -62,8 +64,48 @@ const fetchData = async () => {
         let div = document.getElementById("log");
         let p = document.createElement("p");
         let l = document.createElement("hr");
+        let b = document.createElement("br");
         div.append(message, p);
         div.append(l);
+        div.append(b);
+      } else if (element.turbiditeit > 40 || element.turbiditeit < 10) {
+        let message =
+          "Kritiek waarde gevonden! Meting: " +
+          element.meting_id +
+          " Boei ID: " +
+          element.boei_id +
+          " Grenswaarde overschreden" +
+          " Turbidity: " +
+          element.turbiditeit +
+          " op tijdstip: " +
+          element.tijd;
+
+        let div = document.getElementById("log");
+        let p = document.createElement("p");
+        let l = document.createElement("hr");
+        let b = document.createElement("br");
+        div.append(message, p);
+        div.append(l);
+        div.append(b);
+      } else if (element.ecvoltage > 30 || element.ecvoltage < 1) {
+        let message =
+          "Kritiek waarde gevonden! Meting: " +
+          element.meting_id +
+          " Boei ID: " +
+          element.boei_id +
+          " Grenswaarde overschreden" +
+          " EC Waarde: " +
+          element.ecvoltage +
+          " op tijdstip: " +
+          element.tijd;
+
+        let div = document.getElementById("log");
+        let p = document.createElement("p");
+        let l = document.createElement("hr");
+        let b = document.createElement("br");
+        div.append(message, p);
+        div.append(l);
+        div.append(b);
       }
     }
   } catch (error) {
