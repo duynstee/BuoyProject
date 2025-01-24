@@ -15,6 +15,7 @@
         <v-select
           v-model="buoyToDelete"
           :items="buoys"
+          item-title="name"
           item-text="name"
           item-value="id"
           label="Select Buoy to Delete"
@@ -67,26 +68,30 @@
     <v-dialog v-model="mapPicker" max-width="800px" persistent>
       <v-card>
         <v-card-title>Pick a Location</v-card-title>
-          <v-card-text>
+        <v-card-text>
           <map-picker
             :buoys="buoys"
             @location-selected="setLocation"
-      ></map-picker>
-    </v-card-text>
-    <v-card-actions>
-      
-      <v-btn color="primary" @click="confirmLocation">Cancel</v-btn>
+          ></map-picker>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="confirmLocation">Confirm</v-btn>
 
-      <v-btn color="secondary" @click="cancelLocationSelection">Confirm</v-btn>
-    </v-card-actions>
-  </v-card>
-</v-dialog>
+          <v-btn color="secondary" @click="cancelLocationSelection"
+            >cancel</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
+    <div style="width: 100%; height: 75vh">
+      <Map />
+    </div>
   </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import BuoyMenu from "@/components/BuoyMenu.vue";
 import MapPicker from "@/components/MapPicker.vue";
 
@@ -115,63 +120,69 @@ export default {
   },
   methods: {
     addBuoy() {
-    if (this.newBuoyName && this.selectedLocation) {
-      const newId = this.buoys.length
-        ? this.buoys[this.buoys.length - 1].id + 1
-        : 1;
-      const newBuoy = {
-        id: newId,
-        name: this.newBuoyName,
-        sensors: this.sensors.map((sensor) => ({
-          name: sensor.name,
-          enabled: sensor.enabled,
-        })),
-        location: this.selectedLocation,
-      };
+      if (this.newBuoyName && this.selectedLocation) {
+        const newId = this.buoys.length
+          ? this.buoys[this.buoys.length - 1].id + 1
+          : 1;
+        const newBuoy = {
+          id: newId,
+          name: this.newBuoyName,
+          sensors: this.sensors.map((sensor) => ({
+            name: sensor.name,
+            enabled: sensor.enabled,
+          })),
+          location: this.selectedLocation,
+        };
 
-      this.buoys.push(newBuoy);
-      this.newBuoyName = "";
-      this.sensors.forEach((sensor) => (sensor.enabled = false));
-      this.selectedLocation = null;
-      this.showAddBuoyDialog = false;
-    }
-  },
+        this.buoys.push(newBuoy);
+        this.newBuoyName = "";
+        this.sensors.forEach((sensor) => (sensor.enabled = false));
+        this.selectedLocation = null;
+        this.showAddBuoyDialog = false;
+
+        selectedLocation = null;
+      }
+    },
     deleteBuoy() {
-    if (this.buoyToDelete !== null) {
-      this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
-      this.buoyToDelete = null;
-    }
-  },
-  setLocation(location) {
-    // Update the temporary location when a selection is made
-    this.temporaryLocation = location;
-  },
-  confirmLocation() {
-    // Update the final selected location and close the map picker
-    this.selectedLocation = this.temporaryLocation;
-    this.mapPicker = false;
-  },
-  cancelLocationSelection() {
-    // Discard the temporary location and close the map picker
-    this.temporaryLocation = null;
-    this.mapPicker = false;
-  },
+      if (this.buoyToDelete !== null) {
+        this.buoys = this.buoys.filter((buoy) => buoy.id !== this.buoyToDelete);
+        this.buoyToDelete = null;
+      }
+    },
+    setLocation(location) {
+      // Update the temporary location when a selection is made
+      this.temporaryLocation = location;
+    },
+    cancelLocationSelection() {
+      // Update the final selected location and close the map picker
+      this.selectedLocation = this.temporaryLocation;
+      this.mapPicker = false;
+    },
+    confirmLocation() {
+      // Discard the temporary location and close the map picker
+      this.temporaryLocation = null;
+      this.mapPicker = false;
+    },
     async addUser() {
       if (this.newUsername && this.newPassword) {
         try {
-          const response = await axios.post('http://localhost:3000/addUser', {
-            username: this.newUsername,
-            password: this.newPassword
-          }, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
+          const response = await axios.post(
+            "http://localhost:3000/addUser",
+            {
+              username: this.newUsername,
+              password: this.newPassword,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
             }
-          });
+          );
           console.log(`User added: ${response.data.message}`);
-          this.newUsername = '';
-          this.newPassword = '';  
+          this.newUsername = "";
+          this.newPassword = "";
         } catch (error) {
-          console.error('Error adding user: ', error);
+          console.error("Error adding user: ", error);
         }
       }
     },
