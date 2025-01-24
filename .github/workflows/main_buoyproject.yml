@@ -78,5 +78,6 @@ jobs:
         id: deploy-backend
         with:
           app-name: "BuoyProjectBackend" # This is the Azure Web App name
+          resource-group: "buoyproject"
           slot-name: "Production"
           package: ./backend
