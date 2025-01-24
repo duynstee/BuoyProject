@@ -68,6 +68,8 @@ export default {
           password: this.password,
         });
 
+        this.$emit("login-success");
+
         const token = response.data.token;
         console.log("Received token:", token); // Log the token to the console
         localStorage.setItem("token", token);
@@ -78,7 +80,8 @@ export default {
         const savedToken = localStorage.getItem("token");
         console.log("Saved token in local storage:", savedToken);
 
-        this.$router.push({ name: "Settings" }); // Navigate to settings page
+        window.location.reload();
+        this.$router.push('/'); // Navigate to the home page
       } catch (error) {
         this.errorMessages =
           error.response?.data?.message || "An error occurred.";
@@ -106,7 +109,10 @@ export default {
     }
   },
   mounted() {
-    this.fetchProtectedData();
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.$router.push('/'); // Redirect to home page if token exists
+    }
   }
 };
 </script>
