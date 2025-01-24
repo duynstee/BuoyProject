@@ -5,11 +5,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
 const SECRET_KEY = 'your_secret_key';
 
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsOptions = {
+  origin:
+    "https://buoyproject-awb6hvh3c8c3dmdw.westeurope-01.azurewebsites.net/", // Replace with your frontend's Azure URL
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 const users = [
   { username: 'admin', password: 'groep3' },
@@ -66,6 +72,7 @@ app.get('/protected', verifyToken, (req, res) => {
     res.json({ message: 'This is a protected route' });
   });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
