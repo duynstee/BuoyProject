@@ -4,7 +4,7 @@
     <div style="width: 100%; height: 75vh">
       <Map />
     </div>
-    
+
     <h1>Data boeien</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
@@ -57,13 +57,24 @@
             <v-icon>mdi-air-filter</v-icon>
             <span>Oxygen</span>
           </div>
-          <LineChart class="custom-line-chart" :chartData="OxygenData" :options="chartOptions" />
+          <LineChart
+            class="custom-line-chart"
+            :chartData="OxygenData"
+            :options="chartOptions"
+          />
         </div>
         <div class="image-container">
           <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
           <button @click="switchImage">Switch Image</button>
         </div>
       </div>
+    </div>
+    <br />
+    <br />
+    <hr />
+    <h1>Error Log</h1>
+    <div id="log">
+      <p>Errors:</p>
     </div>
   </v-container>
 </template>
@@ -141,7 +152,7 @@ export default {
             label: "Boei 2",
             backgroundColor: "#79f879",
             borderColor: "#79f879",
-            data: [0, 1 , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
           },
           {
             label: "Boei 3",
@@ -207,7 +218,7 @@ export default {
           "Sunday",
         ],
         datasets: [
-        {
+          {
             label: "Boei 1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -245,7 +256,7 @@ export default {
           "Sunday",
         ],
         datasets: [
-        {
+          {
             label: "Boei 1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",

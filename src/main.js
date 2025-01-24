@@ -31,7 +31,40 @@ const fetchData = async () => {
     for (const element of tempArray) {
       console.log(element);
       console.log(element.temperatuur);
-      tempData = element.temperatuur;
+      if (element.temperatuur > 35 || element.temperatuur < 5) {
+        let message =
+          "Kritiek waarde gevonden! Meting: " +
+          element.meting_id +
+          " Boei ID: " +
+          element.boei_id +
+          " Grenswaarde overschreden" +
+          " Waarde: " +
+          element.temperatuur +
+          " op tijdstip: " +
+          element.tijd;
+        let div = document.getElementById("log");
+        let p = document.createElement("p");
+        let l = document.createElement("hr");
+        div.append(message, p);
+        div.append(l);
+      } else if (element.phwaarde > 9 || element.phwaarde < 6) {
+        let message =
+          "Kritiek waarde gevonden! Meting: " +
+          element.meting_id +
+          " Boei ID: " +
+          element.boei_id +
+          " Grenswaarde overschreden" +
+          " Waarde: " +
+          element.phwaarde +
+          " op tijdstip: " +
+          element.tijd;
+
+        let div = document.getElementById("log");
+        let p = document.createElement("p");
+        let l = document.createElement("hr");
+        div.append(message, p);
+        div.append(l);
+      }
     }
   } catch (error) {
     console.error("Error fetching users:", error.message);
