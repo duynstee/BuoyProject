@@ -9,13 +9,26 @@ import SettingsPage from "../views/SettingsPage.vue";
 const routes = [
   { path: "/", name: "Home", component: HomePage },
   { path: "/login", name: "Login", component: LoginPage },
-  { path: "/settings", name: "Settings", component: SettingsPage },
+  { path: "/settings", name: "Settings", component: SettingsPage, meta: { requiresAuth: true } },
 ];
 
 // Create the router instance
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      next({ name: 'Login' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

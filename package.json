@@ -6,15 +6,19 @@
     "serve": "vite preview",
     "build": "vite build",
     "lint": "vue-cli-service lint",
-    "dev": "vite"
+    "dev": "vite",
+    "start": "node server.js"
   },
   "dependencies": {
     "@maptiler/sdk": "^3.0.1",
     "@mdi/font": "5.9.55",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
     "chart.js": "^4.4.7",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "oracledb": "^6.7.1",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
