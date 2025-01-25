@@ -67,6 +67,7 @@ export default {
         const token = btoa(JSON.stringify(tokenPayload)); // Base64-encode the token
         localStorage.setItem("token", token);
         this.$router.push("/"); // Navigate to the home page
+        location.reload(); // Reload the page to update the navigation bar
       } catch (error) {
         console.error("Error logging in:", error);
         this.errorMessages = "An error occurred.";

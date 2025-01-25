@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import * as jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 // Import your page components
 import HomePage from "../views/HomePage.vue";
@@ -28,6 +28,12 @@ router.beforeEach((to, from, next) => {
       next({ name: "Login" }); // No token, redirect to login
     } else {
       try {
+        const parts = token.split('.');
+        if (parts.length !== 3) {
+          console.error('Invalid token format:', token);
+          throw new Error('Invalid token format');
+        }
+
         const decoded = jwtDecode(token);
         const currentTime = Math.floor(Date.now() / 1000);
 
