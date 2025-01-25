@@ -98,13 +98,32 @@ export default {
   },
   data() {
     return {
+      colors: ["#f87979", "#79a9f8", "#008000", "#f8d779"],
       TemperatureData: {
         labels: [],
         datasets: [
           {
-            label: "Temperature (°C)",
+            label: "Buoy1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
+            data: [],
+          },
+          {
+            label: "Buoy2",
+            backgroundColor: "#79a9f8",
+            borderColor: "#79a9f8",
+            data: [],
+          },
+          {
+            label: "Buoy3",
+            backgroundColor: "#50C878",
+            borderColor: "#50C878",
+            data: [],
+          },
+          {
+            label: "Buoy4",
+            backgroundColor: "#f8d779",
+            borderColor: "#f8d779",
             data: [],
           },
         ],
@@ -112,10 +131,28 @@ export default {
       PHData: {
         labels: [],
         datasets: [
+        {
+            label: "Buoy1",
+            backgroundColor: "#f87979",
+            borderColor: "#f87979",
+            data: [],
+          },
           {
-            label: "PH Levels",
-            backgroundColor: "#79f8d7",
-            borderColor: "#79f8d7",
+            label: "Buoy2",
+            backgroundColor: "#79a9f8",
+            borderColor: "#79a9f8",
+            data: [],
+          },
+          {
+            label: "Buoy3",
+            backgroundColor: "#50C878",
+            borderColor: "#50C878",
+            data: [],
+          },
+          {
+            label: "Buoy4",
+            backgroundColor: "#f8d779",
+            borderColor: "#f8d779",
             data: [],
           },
         ],
@@ -123,10 +160,28 @@ export default {
       TurbidityData: {
         labels: [],
         datasets: [
+        {
+            label: "Buoy1",
+            backgroundColor: "#f87979",
+            borderColor: "#f87979",
+            data: [],
+          },
           {
-            label: "Turbidity",
+            label: "Buoy2",
             backgroundColor: "#79a9f8",
             borderColor: "#79a9f8",
+            data: [],
+          },
+          {
+            label: "Buoy3",
+            backgroundColor: "#50C878",
+            borderColor: "#50C878",
+            data: [],
+          },
+          {
+            label: "Buoy4",
+            backgroundColor: "#f8d779",
+            borderColor: "#f8d779",
             data: [],
           },
         ],
@@ -134,10 +189,28 @@ export default {
       ConductivityData: {
         labels: [],
         datasets: [
+        {
+            label: "Buoy1",
+            backgroundColor: "#f87979",
+            borderColor: "#f87979",
+            data: [],
+          },
           {
-            label: "Conductivity",
-            backgroundColor: "#d279f8",
-            borderColor: "#d279f8",
+            label: "Buoy2",
+            backgroundColor: "#79a9f8",
+            borderColor: "#79a9f8",
+            data: [],
+          },
+          {
+            label: "Buoy3",
+            backgroundColor: "#50C878",
+            borderColor: "#50C878",
+            data: [],
+          },
+          {
+            label: "Buoy4",
+            backgroundColor: "#f8d779",
+            borderColor: "#f8d779",
             data: [],
           },
         ],
@@ -145,8 +218,26 @@ export default {
       OxygenData: {
         labels: [],
         datasets: [
+        {
+            label: "Buoy1",
+            backgroundColor: "#f87979",
+            borderColor: "#f87979",
+            data: [],
+          },
           {
-            label: "Oxygen Levels",
+            label: "Buoy2",
+            backgroundColor: "#79a9f8",
+            borderColor: "#79a9f8",
+            data: [],
+          },
+          {
+            label: "Buoy3",
+            backgroundColor: "#50C878",
+            borderColor: "#50C878",
+            data: [],
+          },
+          {
+            label: "Buoy4",
             backgroundColor: "#f8d779",
             borderColor: "#f8d779",
             data: [],
@@ -196,11 +287,19 @@ export default {
           labels.push(element.tijd || "Unknown");
         }
 
+        // Data for Buoy1
         this.TemperatureData.datasets[0].data = temperatureData;
         this.PHData.datasets[0].data = phData;
         this.TurbidityData.datasets[0].data = turbidityData;
         this.ConductivityData.datasets[0].data = conductivityData;
         this.OxygenData.datasets[0].data = oxygenData;
+
+        // Data for Buoy2
+        this.TemperatureData.datasets[1].data = temperatureData;
+        this.PHData.datasets[1].data = phData;
+        this.TurbidityData.datasets[1].data = turbidityData;
+        this.ConductivityData.datasets[1].data = conductivityData;
+        this.OxygenData.datasets[1].data = oxygenData;
 
         this.TemperatureData.labels = labels;
         this.PHData.labels = labels;
