@@ -3,7 +3,7 @@
     <v-toolbar-title class="title">
       <router-link to="/" class="nav-link">
         <v-icon size="48px" class="icon">mdi-elephant</v-icon>
-        Buoy data</router-link>
+        Kruger Park - Buoy Monitor</router-link>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

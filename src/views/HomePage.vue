@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <h1>Boei locaties</h1>
+    <h1>Buoy locations</h1>
     <div style="width: 100%; height: 75vh">
       <Map />
     </div>
 
-    <h1>Data boeien</h1>
+    <h1>Buoy data</h1>
     <div class="chart-and-image-container">
       <div class="chart-grid">
         <div class="chart-item">
@@ -15,6 +15,7 @@
           </div>
           <LineChart
             class="custom-line-chart"
+            v-if="TemperatureData"
             :chartData="TemperatureData"
             :options="chartOptions"
           />
@@ -26,6 +27,7 @@
           </div>
           <LineChart
             class="custom-line-chart"
+            v-if="PHData"
             :chartData="PHData"
             :options="chartOptions"
           />
@@ -37,6 +39,7 @@
           </div>
           <LineChart
             class="custom-line-chart"
+            v-if="TurbidityData"
             :chartData="TurbidityData"
             :options="chartOptions"
           />
@@ -48,6 +51,7 @@
           </div>
           <LineChart
             class="custom-line-chart"
+            v-if="ConductivityData"
             :chartData="ConductivityData"
             :options="chartOptions"
           />
@@ -59,6 +63,7 @@
           </div>
           <LineChart
             class="custom-line-chart"
+            v-if="OxygenData"
             :chartData="OxygenData"
             :options="chartOptions"
           />
