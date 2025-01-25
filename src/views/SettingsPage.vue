@@ -43,6 +43,7 @@
                 :key="sensor.name"
                 v-model="sensor.enabled"
                 :label="sensor.name"
+                color="blue"
                 inset
               ></v-switch>
             </div>
