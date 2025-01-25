@@ -98,7 +98,7 @@ export default {
   },
   data() {
     return {
-      colors: ["#f87979", "#79a9f8", "#008000", "#f8d779"],
+      colors: ["#f87979", "#79a9f8", "#50C878", "#f8d779"],
       TemperatureData: {
         labels: [],
         datasets: [
