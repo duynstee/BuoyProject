@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import * as jwtDecode from "jwt-decode";
 
 export default {
   data() {
@@ -52,69 +52,29 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
-      console.log("Login button clicked");
-      console.log("Username:", this.username);
-      console.log("Password:", this.password);
-
+    handleLogin() {
       if (!this.username || !this.password) {
         this.errorMessages = "Username and password are required.";
         return;
       }
 
       try {
-        const response = await axios.post("https://buoyprojectbackend.azurewebsites.net/login", {
+        const tokenPayload = {
           username: this.username,
-          password: this.password,
-        });
+          exp: Math.floor(Date.now() / 1000) + 60 * 60, // Token expires in 1 hour
+        };
 
-        this.$emit("login-success");
-
-        const token = response.data.token;
-        console.log("Received token:", token); // Log the token to the console
+        const token = btoa(JSON.stringify(tokenPayload)); // Base64-encode the token
         localStorage.setItem("token", token);
-
-        this.$emit("login-success");
-
-        // Verify if the token is saved in local storage
-        const savedToken = localStorage.getItem("token");
-        console.log("Saved token in local storage:", savedToken);
-
-        window.location.reload();
-        this.$router.push('/'); // Navigate to the home page
+        this.$router.push("/"); // Navigate to the home page
       } catch (error) {
-        this.errorMessages =
-          error.response?.data?.message || "An error occurred.";
         console.error("Error logging in:", error);
+        this.errorMessages = "An error occurred.";
       }
     },
-    async fetchProtectedData() {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        this.errorMessages = "No token found. Please log in.";
-        return;
-      }
-
-      try {
-        const response = await axios.get('http://localhost:3000/protected', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        this.protectedData = response.data;
-      } catch (error) {
-        this.errorMessages = error.response?.data?.message || "An error occurred.";
-        console.error("Error fetching protected data:", error);
-      }
-    }
   },
-  mounted() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.$router.push('/'); // Redirect to home page if token exists
-    }
-  }
 };
+
 </script>
 
 <style scoped>

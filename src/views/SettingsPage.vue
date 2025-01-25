@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import * as jwtDecode from "jwt-decode";
 import axios from "axios";
 import BuoyMenu from "@/components/BuoyMenu.vue";
 import MapPicker from "@/components/MapPicker.vue";
@@ -117,6 +118,7 @@ export default {
         { name: "Turbidity", enabled: false },
         { name: "Electrical Conductivity", enabled: false },
       ],
+      errorMessages: "",
     };
   },
   methods: {
@@ -151,8 +153,7 @@ export default {
       }
     },
     setLocation(location) {
-      // Update the temporary location when a selection is made
-      this.temporaryLocation = location;
+      this.selectedLocation = location;
     },
     cancelLocationSelection() {
       // Update the final selected location and close the map picker
@@ -187,37 +188,33 @@ export default {
         }
       }
     },
-    setLocation(location) {
-      this.selectedLocation = location;
-    },
+    // Token check before rendering
+    checkToken() {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          this.errorMessages = "No token found. Please log in.";
+          this.$router.push("/login");
+          return;
+        }
+
+        const decodedToken = jwtDecode(token); // Decode the token
+        console.log("Decoded token:", decodedToken);
+
+        // Check if token has expired
+        if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+          this.errorMessages = "Token expired. Please log in again.";
+          this.$router.push("/login");
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        this.errorMessages = "Invalid token. Please log in again.";
+        this.$router.push("/login");
+      }
+    }
   },
+  mounted() {
+    this.checkToken(); // Check the token when the page is loaded
+  }
 };
 </script>
-
-<style scoped>
-.background-image {
-  background-image: url("@/assets/River.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.full-height {
-  height: 100%;
-}
-
-.menustyle {
-  margin-bottom: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.title {
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.delete-form {
-  margin-top: 40px;
-}
-</style>
