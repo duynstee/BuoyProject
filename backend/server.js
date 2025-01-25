@@ -18,7 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const users = [
-  { username: 'admin', password: 'groep3' },
+  { username: 'admin', password: 'asdf' },
   // Add more users as needed
 ];
 
