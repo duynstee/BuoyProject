@@ -8,10 +8,8 @@ loadFonts();
 
 createApp(App).use(vuetify).use(router).mount("#app");
 
-const fetchData = async () => {
-  const url =
-    "https://gec13051aa051a2-boei3.adb.eu-amsterdam-1.oraclecloudapps.com/ords/admin/metingen/";
 
+<<<<<<< HEAD
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -145,3 +143,5 @@ const fetchDataGraphs = async () => {
 };
 // Call the function
 fetchData();
+=======
+>>>>>>> 2d8db37a51facddcc5a7e99720499b454d0482d9

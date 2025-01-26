@@ -84,7 +84,6 @@ import LineChart from "@/components/LineChart.vue";
 import ThumbsUp from "@/assets/ThumbsUp.jpg";
 import ThumbsDown from "@/assets/ThumbsDown.jpg";
 import Map from "@/components/Map.vue";
-import MapPicker from "@/components/MapPicker.vue";
 
 export default {
   name: "HomePage",
@@ -95,20 +94,13 @@ export default {
   data() {
     return {
       TemperatureData: {
-        labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        labels: [],
         datasets: [
           {
-            label: "Boei 1",
+            label: "Temperature (°C)",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
+<<<<<<< HEAD
             data: [10, 10, 10, 10, 10, 10, 10, 10],
           },
           {
@@ -128,162 +120,56 @@ export default {
             backgroundColor: "#f8f879",
             borderColor: "#f8f879",
             data: [10, 10, 10, 10, 10, 10, 10, 10],
+=======
+            data: [],
+>>>>>>> 2d8db37a51facddcc5a7e99720499b454d0482d9
           },
         ],
       },
-
       PHData: {
-        labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        labels: [],
         datasets: [
           {
-            label: "Boei 1",
-            backgroundColor: "#f87979",
-            borderColor: "#f87979",
-            data: [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-          },
-          {
-            label: "Boei 2",
-            backgroundColor: "#79f879",
-            borderColor: "#79f879",
-            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-          },
-          {
-            label: "Boei 3",
-            backgroundColor: "#7979f8",
-            borderColor: "#7979f8",
-            data: [30, 30, 30, 30, 30, 30, 30, 30],
-          },
-          {
-            label: "Boei 4",
-            backgroundColor: "#f8f879",
-            borderColor: "#f8f879",
-            data: [10, 10, 10, 10, 10, 10, 10, 10],
+            label: "PH Levels",
+            backgroundColor: "#79f8d7",
+            borderColor: "#79f8d7",
+            data: [],
           },
         ],
       },
-
       TurbidityData: {
-        labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        labels: [],
         datasets: [
           {
-            label: "Boei 1",
-            backgroundColor: "#f87979",
-            borderColor: "#f87979",
-            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
-          },
-          {
-            label: "Boei 2",
-            backgroundColor: "#79f879",
-            borderColor: "#79f879",
-            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
-          },
-          {
-            label: "Boei 3",
-            backgroundColor: "#7979f8",
-            borderColor: "#7979f8",
-            data: [20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0],
-          },
-          {
-            label: "Boei 4",
-            backgroundColor: "#f8f879",
-            borderColor: "#f8f879",
-            data: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+            label: "Turbidity",
+            backgroundColor: "#79a9f8",
+            borderColor: "#79a9f8",
+            data: [],
           },
         ],
       },
-
       ConductivityData: {
-        labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        labels: [],
         datasets: [
           {
-            label: "Boei 1",
-            backgroundColor: "#f87979",
-            borderColor: "#f87979",
-            data: [50, 40, 30, 20, 10, 0, -10, -20],
-          },
-          {
-            label: "Boei 2",
-            backgroundColor: "#79f879",
-            borderColor: "#79f879",
-            data: [-20, -10, 0, 10, 20, 30, 40, 50],
-          },
-          {
-            label: "Boei 3",
-            backgroundColor: "#7979f8",
-            borderColor: "#7979f8",
-            data: [30, 30, 30, 30, 30, 30, 30, 30],
-          },
-          {
-            label: "Boei 4",
-            backgroundColor: "#f8f879",
-            borderColor: "#f8f879",
-            data: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+            label: "Conductivity",
+            backgroundColor: "#d279f8",
+            borderColor: "#d279f8",
+            data: [],
           },
         ],
       },
-
       OxygenData: {
-        labels: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        labels: [],
         datasets: [
           {
-            label: "Boei 1",
-            backgroundColor: "#f87979",
-            borderColor: "#f87979",
-            data: [50, 40, 30, 20, 10, 0, -10, -20],
-          },
-          {
-            label: "Boei 2",
-            backgroundColor: "#79f879",
-            borderColor: "#79f879",
-            data: [-20, -10, 0, 10, 20, 30, 40, 50],
-          },
-          {
-            label: "Boei 3",
-            backgroundColor: "#7979f8",
-            borderColor: "#7979f8",
-            data: [30, 30, 30, 30, 30, 30, 30, 30],
-          },
-          {
-            label: "Boei 4",
-            backgroundColor: "#f8f879",
-            borderColor: "#f8f879",
-            data: [10, 10, 10, 10, 10, 10, 10, 10],
+            label: "Oxygen Levels",
+            backgroundColor: "#f8d779",
+            borderColor: "#f8d779",
+            data: [],
           },
         ],
       },
-
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -292,6 +178,58 @@ export default {
     };
   },
   methods: {
+    async fetchData() {
+      const url =
+        "https://gec13051aa051a2-boei3.adb.eu-amsterdam-1.oraclecloudapps.com/ords/admin/metingen/";
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const tempArray = data.items;
+
+        const temperatureData = [];
+        const phData = [];
+        const turbidityData = [];
+        const conductivityData = [];
+        const oxygenData = [];
+        const labels = [];
+
+        for (const element of tempArray) {
+          temperatureData.push(element.temperatuur || null);
+          phData.push(element.phwaarde || null);
+          turbidityData.push(element.turbiditeit || null);
+          conductivityData.push(element.ecvoltage || null);
+          oxygenData.push(element.zuurstof || null);
+          labels.push(element.tijd || "Unknown");
+        }
+
+        this.TemperatureData.datasets[0].data = temperatureData;
+        this.PHData.datasets[0].data = phData;
+        this.TurbidityData.datasets[0].data = turbidityData;
+        this.ConductivityData.datasets[0].data = conductivityData;
+        this.OxygenData.datasets[0].data = oxygenData;
+
+        this.TemperatureData.labels = labels;
+        this.PHData.labels = labels;
+        this.TurbidityData.labels = labels;
+        this.ConductivityData.labels = labels;
+        this.OxygenData.labels = labels;
+
+        console.log("Data successfully loaded and updated!");
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    },
     switchImage() {
       this.currentImage =
         this.currentImage === ThumbsUp ? ThumbsDown : ThumbsUp;
@@ -299,12 +237,7 @@ export default {
   },
   mounted() {
     console.log("HomePage mounted");
-    console.log("TemperatureData:", this.chartData);
-    console.log("PHData:", this.chartData);
-    console.log("TurbidityData:", this.chartData);
-    console.log("ConductivityData:", this.chartData);
-    console.log("OxygenData:", this.chartData);
-    console.log("chartOptions:", this.chartOptions);
+    this.fetchData();
   },
 };
 </script>
