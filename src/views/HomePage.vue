@@ -294,13 +294,6 @@ export default {
         this.ConductivityData.datasets[0].data = conductivityData;
         this.OxygenData.datasets[0].data = oxygenData;
 
-        // Data for Buoy2
-        this.TemperatureData.datasets[1].data = temperatureData;
-        this.PHData.datasets[1].data = phData;
-        this.TurbidityData.datasets[1].data = turbidityData;
-        this.ConductivityData.datasets[1].data = conductivityData;
-        this.OxygenData.datasets[1].data = oxygenData;
-
         this.TemperatureData.labels = labels;
         this.PHData.labels = labels;
         this.TurbidityData.labels = labels;
