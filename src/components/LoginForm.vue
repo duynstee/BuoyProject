@@ -89,8 +89,11 @@ export default {
     localStorage.setItem("token", token);
 
     // Redirect or reload the app
-    location.reload();
-    this.$router.push("/");
+    this.$router.push("/").then(() => {
+      this.$nextTick(() => { 
+        location.reload();
+      });
+    });
   } catch (error) {
     console.error("Error logging in:", error);
     this.errorMessages = "An error occurred.";
