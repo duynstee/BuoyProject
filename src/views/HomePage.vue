@@ -69,8 +69,7 @@
           />
         </div>
         <div class="image-container">
-          <img :src="currentImage" alt="Thumbs" class="thumbs-image" />
-          <button @click="switchImage">Switch Image</button>
+          <img v-if="!hasError" :src="currentImage" alt="Thumbs" class="thumbs-image" />
         </div>
       </div>
     </div>
@@ -249,6 +248,7 @@ export default {
         maintainAspectRatio: false,
       },
       currentImage: ThumbsUp,
+      hasError: false,
     };
   },
   methods: {
@@ -300,9 +300,11 @@ export default {
         this.ConductivityData.labels = labels;
         this.OxygenData.labels = labels;
 
+        this.hasError = false;
         console.log("Data successfully loaded and updated!");
       } catch (error) {
         console.error("Error fetching data:", error.message);
+        this.hasError = true;
       }
     },
     switchImage() {
