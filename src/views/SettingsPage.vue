@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import * as jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import BuoyMenu from "@/components/BuoyMenu.vue";
 import MapPicker from "@/components/MapPicker.vue";
