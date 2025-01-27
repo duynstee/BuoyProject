@@ -218,3 +218,28 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.background-image {
+  background-image: url("@/assets/River.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.menustyle {
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.title {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+</style>
