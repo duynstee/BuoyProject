@@ -39,14 +39,14 @@ router.beforeEach((to, from, next) => {
 
         if (decoded.exp && decoded.exp < currentTime) {
           console.error("Token expired");
-          localStorage.removeItem("token"); // Remove expired token
+
           next({ name: "Login" }); // Redirect to login
         } else {
           next(); // Token is valid, proceed
         }
       } catch (err) {
         console.error("Invalid token:", err);
-        localStorage.removeItem("token"); // Remove invalid token
+
         next({ name: "Login" }); // Redirect to login
       }
     }
