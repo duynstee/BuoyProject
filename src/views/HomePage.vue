@@ -69,7 +69,12 @@
           />
         </div>
         <div class="image-container">
-          <img v-if="!hasError" :src="currentImage" alt="Thumbs" class="thumbs-image" />
+          <img
+            v-if="!hasError"
+            :src="currentImage"
+            alt="Thumbs"
+            class="thumbs-image"
+          />
         </div>
       </div>
     </div>
@@ -130,7 +135,7 @@ export default {
       PHData: {
         labels: [],
         datasets: [
-        {
+          {
             label: "Buoy1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -159,7 +164,7 @@ export default {
       TurbidityData: {
         labels: [],
         datasets: [
-        {
+          {
             label: "Buoy1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -188,7 +193,7 @@ export default {
       ConductivityData: {
         labels: [],
         datasets: [
-        {
+          {
             label: "Buoy1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -217,7 +222,7 @@ export default {
       OxygenData: {
         labels: [],
         datasets: [
-        {
+          {
             label: "Buoy1",
             backgroundColor: "#f87979",
             borderColor: "#f87979",
@@ -293,18 +298,141 @@ export default {
           labels.push(element.tijd || "Unknown");
         }
 
-        // Data for Buoy1
-        this.TemperatureData.datasets[0].data = temperatureData;
-        this.PHData.datasets[0].data = phData;
-        this.TurbidityData.datasets[0].data = turbidityData;
-        this.ConductivityData.datasets[0].data = conductivityData;
-        this.OxygenData.datasets[0].data = oxygenData;
+        // Ensure all buoys are present in the datasets, even if they have no data
+        this.TemperatureData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Buoy1",
+              backgroundColor: "#f87979",
+              borderColor: "#f87979",
+              data: temperatureData,
+            },
+            {
+              label: "Buoy2",
+              backgroundColor: "#79a9f8",
+              borderColor: "#79a9f8",
+            },
+            {
+              label: "Buoy3",
+              backgroundColor: "#50C878",
+              borderColor: "#50C878",
+            },
+            {
+              label: "Buoy4",
+              backgroundColor: "#f8d779",
+              borderColor: "#f8d779",
+            },
+          ],
+        };
 
-        this.TemperatureData.labels = labels;
-        this.PHData.labels = labels;
-        this.TurbidityData.labels = labels;
-        this.ConductivityData.labels = labels;
-        this.OxygenData.labels = labels;
+        this.PHData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Buoy1",
+              backgroundColor: "#f87979",
+              borderColor: "#f87979",
+              data: phData,
+            },
+            {
+              label: "Buoy2",
+              backgroundColor: "#79a9f8",
+              borderColor: "#79a9f8",
+            },
+            {
+              label: "Buoy3",
+              backgroundColor: "#50C878",
+              borderColor: "#50C878",
+            },
+            {
+              label: "Buoy4",
+              backgroundColor: "#f8d779",
+              borderColor: "#f8d779",
+            },
+          ],
+        };
+
+        this.TurbidityData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Buoy1",
+              backgroundColor: "#f87979",
+              borderColor: "#f87979",
+              data: turbidityData,
+            },
+            {
+              label: "Buoy2",
+              backgroundColor: "#79a9f8",
+              borderColor: "#79a9f8",
+            },
+            {
+              label: "Buoy3",
+              backgroundColor: "#50C878",
+              borderColor: "#50C878",
+            },
+            {
+              label: "Buoy4",
+              backgroundColor: "#f8d779",
+              borderColor: "#f8d779",
+            },
+          ],
+        };
+
+        this.ConductivityData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Buoy1",
+              backgroundColor: "#f87979",
+              borderColor: "#f87979",
+              data: conductivityData,
+            },
+            {
+              label: "Buoy2",
+              backgroundColor: "#79a9f8",
+              borderColor: "#79a9f8",
+            },
+            {
+              label: "Buoy3",
+              backgroundColor: "#50C878",
+              borderColor: "#50C878",
+            },
+            {
+              label: "Buoy4",
+              backgroundColor: "#f8d779",
+              borderColor: "#f8d779",
+            },
+          ],
+        };
+
+        this.OxygenData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Buoy1",
+              backgroundColor: "#f87979",
+              borderColor: "#f87979",
+              data: oxygenData,
+            },
+            {
+              label: "Buoy2",
+              backgroundColor: "#79a9f8",
+              borderColor: "#79a9f8",
+            },
+            {
+              label: "Buoy3",
+              backgroundColor: "#50C878",
+              borderColor: "#50C878",
+            },
+            {
+              label: "Buoy4",
+              backgroundColor: "#f8d779",
+              borderColor: "#f8d779",
+            },
+          ],
+        };
 
         this.hasError = false;
         console.log("Data successfully loaded and updated!");

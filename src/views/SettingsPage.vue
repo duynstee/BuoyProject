@@ -64,6 +64,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
 
     <!-- Map Dialog -->
     <v-dialog v-model="mapPicker" max-width="800px" persistent>
@@ -191,7 +192,7 @@ export default {
     // Token check before rendering
     checkToken() {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
           this.errorMessages = "No token found. Please log in.";
           this.$router.push("/login");
@@ -211,11 +212,11 @@ export default {
         this.errorMessages = "Invalid token. Please log in again.";
         this.$router.push("/login");
       }
-    }
+    },
   },
   mounted() {
     this.checkToken(); // Check the token when the page is loaded
-  }
+  },
 };
 </script>
 
@@ -241,5 +242,4 @@ export default {
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
-
 </style>
