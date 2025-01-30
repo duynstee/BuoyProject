@@ -254,7 +254,7 @@ export default {
   methods: {
     async fetchData() {
       const url =
-        "https://gec13051aa051a2-boei3.adb.eu-amsterdam-1.oraclecloudapps.com/ords/admin/metingen/";
+        "https://gec13051aa051a2-boei3.adb.eu-amsterdam-1.oraclecloudapps.com/ords/admin/metingen/?order_by=meting_id:desc";
 
       try {
         const response = await fetch(url, {
@@ -270,6 +270,12 @@ export default {
 
         const data = await response.json();
         const tempArray = data.items;
+      
+        // Sort the data by meting_id in descending order (latest first)
+        tempArray.sort((b, a) => b.meting_id - a.meting_id);
+
+        // Optionally, limit the number of data points to show only the latest 10
+        const latestData = tempArray.slice(0, 10);
 
         const temperatureData = [];
         const phData = [];
